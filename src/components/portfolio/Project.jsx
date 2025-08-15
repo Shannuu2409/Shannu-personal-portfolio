@@ -1,6 +1,9 @@
+// src/components/Projects.jsx
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Github } from "lucide-react";
+import Live from "./Live"; // Import the Live icon
 import { data } from "../../data/portfolio";
 import IconImage from "./IconImage";
 
@@ -32,6 +35,11 @@ export default function Projects() {
                     <a href={proj.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="text-gray-400 hover:text-accent transition">
                       <Github size={18} />
                     </a>
+                    {proj.live && ( // Conditionally render the live link
+                      <a href={proj.live} target="_blank" rel="noreferrer" aria-label="Live" className="text-gray-400 hover:text-accent transition">
+                        <Live size={18} />
+                      </a>
+                    )}
                   </span>
                 </div>
 

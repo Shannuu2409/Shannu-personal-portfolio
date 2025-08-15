@@ -6,7 +6,7 @@ const sectionVariants = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0 }
 };
-const { h2: MotionH2, p: MotionP, form: MotionForm, div: MotionDiv } = motion;
+const { h2: MotionH2, p: MotionP, form: MotionForm } = motion;
 
 export default function Contact() {
   const [status, setStatus] = useState("");
@@ -15,11 +15,6 @@ export default function Contact() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [serviceId, setServiceId] = useState("");
-  const [templateId, setTemplateId] = useState("");
-  const [publicKey, setPublicKey] = useState("");
-  const [showSetup, setShowSetup] = useState(false);
-
   useEffect(() => {
     // Get from env variables (Netlify) first
     const envService = import.meta.env.VITE_EMAILJS_SERVICE_ID || "";
@@ -27,28 +22,23 @@ export default function Contact() {
     const envPublic = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
 
     // Fallback to localStorage if available (dev setup)
-    setServiceId(localStorage.getItem("emailjs_service_id") || envService);
-    setTemplateId(localStorage.getItem("emailjs_template_id") || envTemplate);
-    setPublicKey(localStorage.getItem("emailjs_public_key") || envPublic);
+    const serviceId = localStorage.getItem("emailjs_service_id") || envService;
+    const templateId = localStorage.getItem("emailjs_template_id") || envTemplate;
+    const publicKey = localStorage.getItem("emailjs_public_key") || envPublic;
 
-    // Only show setup panel in dev or when flag enabled
-    const flag = localStorage.getItem("emailjs_show_setup") === "1";
-    setShowSetup(import.meta.env.DEV || flag);
+    // Store in component state for use in form submission
+    if (serviceId && templateId && publicKey) {
+      // Store in component state for use in form submission
+      window.emailjsConfig = { serviceId, templateId, publicKey };
+    }
   }, []);
-
-  const saveConfig = () => {
-    localStorage.setItem("emailjs_service_id", serviceId);
-    localStorage.setItem("emailjs_template_id", templateId);
-    localStorage.setItem("emailjs_public_key", publicKey);
-    setStatus("✅ EmailJS config saved in your browser.");
-    setTimeout(() => setStatus(""), 3000);
-  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (!serviceId || !templateId || !publicKey) {
-      setStatus("❌ Please configure EmailJS first.");
+    const config = window.emailjsConfig;
+    if (!config?.serviceId || !config?.templateId || !config?.publicKey) {
+      setStatus("❌ EmailJS not configured. Please contact the administrator.");
       return;
     }
 
@@ -57,14 +47,14 @@ export default function Contact() {
 
       // ✅ Correct way to call emailjs.send
       await emailjs.send(
-        serviceId,
-        templateId,
+        config.serviceId,
+        config.templateId,
         {
           from_name: name,
           from_email: email,
           message
         },
-        publicKey
+        config.publicKey
       );
 
       setStatus("✅ Message sent! I'll get back to you soon.");
@@ -73,15 +63,15 @@ export default function Contact() {
       setMessage("");
     } catch (err) {
       console.error(err);
-      setStatus("❌ Failed to send. Check EmailJS settings and console.");
+      setStatus("❌ Failed to send message. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="scroll-mt-24">
-      <div className="max-w-3xl mx-auto px-6 lg:px-10 py-20">
+    <section id="contact" className="scroll-mt-24 py-20">
+      <div className="max-w-3xl mx-auto px-6 lg:px-10">
         <MotionH2
           variants={sectionVariants}
           initial="hidden"
@@ -160,58 +150,6 @@ export default function Contact() {
         </MotionForm>
 
         {status && <p className="mt-4 text-sm">{status}</p>}
-
-        {showSetup && (
-          <MotionDiv
-            variants={sectionVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-10 rounded-lg border bg-gray-800 p-4"
-          >
-            <details>
-              <summary className="cursor-pointer select-none text-sm text-gray-400">
-                Setup EmailJS (serviceId, templateId, publicKey)
-              </summary>
-              <div className="mt-4 grid gap-3">
-                <div className="grid sm:grid-cols-3 gap-3">
-                  <input
-                    placeholder="Service ID"
-                    value={serviceId}
-                    onChange={(e) => setServiceId(e.target.value)}
-                    className="p-2 rounded border bg-gray-900 border-gray-700"
-                  />
-                  <input
-                    placeholder="Template ID"
-                    value={templateId}
-                    onChange={(e) => setTemplateId(e.target.value)}
-                    className="p-2 rounded border bg-gray-900 border-gray-700"
-                  />
-                  <input
-                    placeholder="Public Key"
-                    value={publicKey}
-                    onChange={(e) => setPublicKey(e.target.value)}
-                    className="p-2 rounded border bg-gray-900 border-gray-700"
-                  />
-                </div>
-                <div className="text-xs text-gray-400">
-                  Template params must include: <code>from_name</code>,{" "}
-                  <code>from_email</code>, <code>message</code>.
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    onClick={saveConfig}
-                    className="px-3 py-1 bg-accent text-black rounded"
-                  >
-                    Save settings
-                  </button>
-                </div>
-              </div>
-            </details>
-          </MotionDiv>
-        )}
       </div>
     </section>
   );

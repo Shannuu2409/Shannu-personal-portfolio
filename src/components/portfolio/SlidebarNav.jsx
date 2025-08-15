@@ -13,8 +13,8 @@ export default function SlidebarNav() {
   return (
     <header className="sticky top-0 z-50 h-16 bg-background/80 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-7xl mx-auto h-full px-6 flex items-center justify-between">
-        <a href="#hero" className="font-semibold tracking-wide hover:text-accent transition-colors">
-          {"shannu"}
+        <a href="#hero" className="font-semibold tracking-wide hover:text-accent text-montserrat transition-colors">
+          {"Shannu"}
         </a>
 
         <nav className="hidden md:flex items-center gap-6 text-sm">

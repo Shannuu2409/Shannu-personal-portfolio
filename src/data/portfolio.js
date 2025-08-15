@@ -1,6 +1,6 @@
 export const data = {
   name: "Shanmukha Kumar Karra",
-  tagline: "Aspiring MERN Stack Developer",
+  tagline: "The Urge To Learn Everything",
   contact: {
     email: "shannu2409@gmail.com",
     phone: "+91 7729014867",
@@ -42,6 +42,12 @@ export const data = {
       name: "Cricket Live Score Web App",
       description: "Developed a live cricket score website using React.js to display real-time match data from a public cricket API. Built a responsive user interface and focused on efficient API integration and dynamic rendering.",
       github: "https://github.com/Shannuu2409"
+    },
+    {
+      name: "SMDB-The Movie DB App (Full Stack)",
+      description: "Developed a live movie database appllication to see movie information,cast, trailer and user can create account and add his favourite movies into watchlist. Designed front-endwith React.js, Vite, Tailwind CSS and TMDB API to fetch movie's data, built the back-end using Node.js and MongoDB for users data aand used Postman for API testing .",
+      github: "https://github.com/Shannuu2409/SMDB-Movie-app",
+      live: "https://smdb-movie-app.vercel.app/"
     }
   ]
 };

@@ -6,7 +6,7 @@ const { p: MotionP, h1: MotionH1, h2: MotionH2, div: MotionDiv } = motion;
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-[80vh] flex items-center hero-glow">
+    <section id="hero" className="relative min-h-screen flex items-center hero-glow">
       <div className="max-w-5xl mx-auto px-6 lg:px-10 py-20">
         <MotionP initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-accent font-mono mb-3">
           Hi, my name is
