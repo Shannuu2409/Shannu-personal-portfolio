@@ -25,7 +25,7 @@ export const data = {
   skills: {
     languages: ["HTML", "CSS", "JavaScript", "Python", "Java", "PHP"],
     frameworks_databases: ["ReactJS", "ExpressJS", "NodeJS", "MongoDB", "Tailwind CSS", "Next.js (Beginner)", "Bootstrap", "Mongoose", "MySQL"],
-    tools: ["Git", "GitHub", "Windows", "Linux", "MS 360", "Figma", "Canva", "Firebase", "Netlify", "Vercel", "AI Tools", "REST APIs", "Postman", "NPM", "Vite", "MongoDB Atlas", "MongoDB Compass"]
+    tools: ["Git", "GitHub", "Windows", "Linux", "MS 360", "Figma", "Canva", "Firebase", "Netlify", "Vercel", "AI Tools", "REST APIs", "Postman", "NPM", "Vite", "MongoDB Atlas", "MongoDB Compass","Docker"]
   },
   projects: [
     {
@@ -96,6 +96,7 @@ export const getIconCandidates = (name, size = 24) => {
     Vite: "logos:vitejs",
     "MongoDB Atlas": "logos:mongodb-icon",
     "MongoDB Compass": "logos:mongodb-icon",
+    Docker: "logos:docker-icon",
   };
 
   const key = String(name);
