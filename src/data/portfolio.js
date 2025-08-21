@@ -119,7 +119,7 @@ export const getIconUrl = (name, size = 24) => {
     Linux: "logos:linux-tux",
     "MS 360": "logos:microsoft-office365",
     Figma: "logos:figma",
-    Canva: "logos:canva-icon",
+    Canva: "skill-icons:canva",
     Firebase: "logos:firebase",
     Netlify: "logos:netlify-icon",
     Vercel: "logos:vercel-icon",
