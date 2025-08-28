@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import { getIconCandidates, getGenericIconDataUrl } from "../../data/portfolio";
+import React, { useEffect, useState } from "react";
+import { getIconUrl, getGenericIconDataUrl } from "../../data/portfolio";
 
 export default function IconImage({ name, size = 24, className = "" }) {
-  const candidates = getIconCandidates(name, size);
-  const [index, setIndex] = useState(0);
+  const [src, setSrc] = useState(getIconUrl(name, size));
 
-  const currentSrc = candidates[index] || getGenericIconDataUrl(size);
+  useEffect(() => {
+    setSrc(getIconUrl(name, size));
+  }, [name, size]);
 
   return (
     <img
-      src={currentSrc}
+      src={src}
       alt={`${name} icon`}
       width={size}
       height={size}
       loading="lazy"
       className={className}
-      onError={() => setIndex((prev) => prev + 1)}
+      onError={() => setSrc(getGenericIconDataUrl(size))}
     />
   );
 }
