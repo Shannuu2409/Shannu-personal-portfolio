@@ -82,12 +82,12 @@ export const data = {
         "Developed a live movie database appllication to see movie information, cast, trailer and user can create account and add his favourite movies into watchlist. Designed front-end with React.js, Vite, Tailwind CSS and TMDB API to fetch movie's data, built the back-end using Node.js and MongoDB for users data and used Postman for API testing.",
       github: "https://github.com/Shannuu2409/SMDB-Movie-app",
       live: "https://smdb-movie-app.vercel.app/"
-    }
+    },
     {
       name: "Focus-Blocker(Chrome Extension)",
       description:
         "Developed a Chrome extension to track user tabs on chrome and block distracting websites on user choice. Designed with React.js, Vite, Tailwind CSS, built the back-end Vanilla JavaScript.",
-      github: "https://github.com/Shannuu2409/Focus-Blocker-ChromeExtension",
+      github: "https://github.com/Shannuu2409/Focus-Blocker-ChromeExtension"
     }
   ]
 };
