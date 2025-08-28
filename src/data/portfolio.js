@@ -83,6 +83,12 @@ export const data = {
       github: "https://github.com/Shannuu2409/SMDB-Movie-app",
       live: "https://smdb-movie-app.vercel.app/"
     }
+    {
+      name: "Focus-Blocker(Chrome Extension)",
+      description:
+        "Developed a Chrome extension to track user tabs on chrome and block distracting websites on user choice. Designed with React.js, Vite, Tailwind CSS, built the back-end Vanilla JavaScript.",
+      github: "https://github.com/Shannuu2409/Focus-Blocker-ChromeExtension",
+    }
   ]
 };
 
